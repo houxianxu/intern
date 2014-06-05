@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-'
 #
-# Copyright (c): 2009-2013 Weiboyi Inc., all rights reserved
-# License: Closed Source
-# Author: Lin, Xing <linxing@weiboyi.com>
 # Description:
 # Version: 1.0
 # History: 2012-12-22 Created By Xing.
 # History: 2014-05-29 Edit by Hou
-__author__ = 'xinglin'
 
 import urllib2
 from bs4 import *
