@@ -1,9 +1,9 @@
-
-# License: Closed Source
-# Description: crawl from http://www.vipyingxiao.com/v/weixin.html
+# -*- coding: utf-8 -*-
+#
+# Description: Crawl from http://www.vipyingxiao.com/v/weixin.html
 # Version: 1.0
-# Platform: ubuntu
-# History: 2014-05-22 Created By Hou
+# Platform: Ubuntu 12.04 LTS
+# History: 2014-05-22 Created By Hou Xianxu
 #
 
 import urllib2
@@ -29,9 +29,9 @@ def crawl_single_page(page_url):
 	 
 
 	# crawl data by table rows
-	# get col names
 	all_data_list = [] # list of list 
 
+	# get col names
 	col_names_tr = all_tr_obj[1]
 	col_names = find_from_single_tr(col_names_tr)
 	all_data_list.append(col_names)
@@ -44,9 +44,7 @@ def crawl_single_page(page_url):
 	return all_data_list
 
 
-	# crawl_single_tr
-
-# find the header of the data from tr
+# crawl_single_tr
 def find_from_single_tr(tag_tr):
 	res_header = []
 	BASE_URL = "http://www.vipyingxiao.com/v/"
@@ -91,7 +89,7 @@ def output_items_into_file(all_data_list, file_path):
 #################### Main functions ####################
 def main():
 
-	file_path = "/media/bigData/weiboyi/AccountCrawler/src/app/crawl_result_vipyingxiao.txt"
+	file_path = "/media/bigData/weiboyi/AccountCrawler/src/app/user_vipyingxiao_20140523.txt" # user_dfdsf_date.txt
 
 	log("STRARTING...................")
 
@@ -101,7 +99,6 @@ def main():
 		# crawling
 		vipyingxiao_all_data_list = crawl_single_page(vipyingxiao_page_url)
 
-		# log ("houxianxu")
 		# oupput
 		output_items_into_file(vipyingxiao_all_data_list, file_path)
 
@@ -109,13 +106,8 @@ def main():
 		log("error when crawling, cause: %s" % base_error)
 
 	# DONE
-	log("ALL DONE")
+	log("ALL DONE!")
 
-
-
-# test
-
-# temp = '<tr height = "33"> houxianxu"</tr> <tr height = "12"> "houxianxu" </tr> <tr height = "12"> "houxianxu" </tr>'
 
 if __name__ == '__main__':
 	main()
