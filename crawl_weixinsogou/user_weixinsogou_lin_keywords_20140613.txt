@@ -1,0 +1,4 @@
+用户名	微信号	主页	二维码	关键字	
+美妆心机	meizhuanxinji	http://weixin.sogou.com/gzh?openid=oIWsFt7L_dIkfzqbsN85DTLphV0E	http://img03.sogoucdn.com/app/a/100520081/NHV3eE-EpnHZh14bnyAQ	meizhuangxinji
+YoYo_心機美妝	yoyo_beauty_store	http://weixin.sogou.com/gzh?openid=oIWsFt5P0e_vPbwnvGhOMfbX2dQ4	http://img03.sogoucdn.com/app/a/100520081/YHWircLE8vyNh9POnyBE	meizhuangxinji
+美妆心机	meizhuangxinjiweixin	http://weixin.sogou.com/gzh?openid=oIWsFt57BsAPzMjzT1-nX0zNJaSQ	http://img03.sogoucdn.com/app/a/100520081/PEwqJebEl9joh-dGnxkY	meizhuangxinji
