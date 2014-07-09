@@ -185,29 +185,42 @@ def get_info_by_tag(info_tag, keywords):
     """
     Return a dictionary of all the info from an info_tag
     """
-
     # store the info
     weibo_info = {}
 
-    weibo_name = get_name_by_tag(info_tag)
-    weibo_id = get_id_by_tag(info_tag)
-    weibo_url = get_url_by_tag(info_tag)
-    weibo_QRcode_url = get_QRcode_url_by_tag(info_tag)
-    weibo_sogou_openid = get_sogou_openid(info_tag)
-    weibo_touxiang_url = get_touxiang_url(info_tag)
-    weibo_is_verified = get_verified_status(info_tag)
-    weibo_func_description = get_func_description(info_tag)
+    weibo_name = None
+    weibo_id = None
+    weibo_url = None
+    weibo_QRcode_url = None
+    weibo_sogou_openid = None
+    weibo_touxiang_url = None
+    weibo_is_verified = None
+    weibo_func_description = None
 
-    weibo_info['weibo_name'] = weibo_name # using weibo_name to in accordance with the name in the MySQL
-    weibo_info['weibo_id'] = weibo_id
-    weibo_info['home_page_url'] = weibo_url
-    weibo_info['QR_code_url'] = weibo_QRcode_url
-    weibo_info['keywords'] = keywords
-    weibo_info['sogou_openid'] = weibo_sogou_openid
-    weibo_info['tou_xiang_url'] = weibo_touxiang_url
-    weibo_info['is_verified'] = weibo_is_verified
-    weibo_info['function_description'] = weibo_func_description
-    return weibo_info
+    try:
+        weibo_name = get_name_by_tag(info_tag)
+        weibo_id = get_id_by_tag(info_tag)
+        weibo_url = get_url_by_tag(info_tag)
+        weibo_QRcode_url = get_QRcode_url_by_tag(info_tag)
+        weibo_sogou_openid = get_sogou_openid(info_tag)
+        weibo_touxiang_url = get_touxiang_url(info_tag)
+        weibo_is_verified = get_verified_status(info_tag)
+        weibo_func_description = get_func_description(info_tag)
+
+    except BaseException as parse_error:
+        print "parse_error in get_info_by_tag function" + parse_error.message
+
+    finally:
+        weibo_info['weibo_name'] = weibo_name # using weibo_name to in accordance with the name in the MySQL
+        weibo_info['weibo_id'] = weibo_id
+        weibo_info['home_page_url'] = weibo_url
+        weibo_info['QR_code_url'] = weibo_QRcode_url
+        weibo_info['keywords'] = keywords
+        weibo_info['sogou_openid'] = weibo_sogou_openid
+        weibo_info['tou_xiang_url'] = weibo_touxiang_url
+        weibo_info['is_verified'] = weibo_is_verified
+        weibo_info['function_description'] = weibo_func_description
+        return weibo_info
 
 # return the first nav page url by keywords
 def get_nav_page_url_by_keywords(keywords):
