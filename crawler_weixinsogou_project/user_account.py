@@ -232,10 +232,6 @@ def get_connect_by_proxyip_ua(url):
         opener = urllib2.build_opener(proxy_support,urllib2.HTTPHandler)
         urllib2.install_opener(opener)
 
-    except BaseException as urllib2_proxy_error:
-        print "error: urllib2 proxy error " + output_error.message
-
-    finally: # do not use proxy
         ## show the debug log
         # opener = show_request_debug_log()
         # change the header user-agent
@@ -243,7 +239,11 @@ def get_connect_by_proxyip_ua(url):
         headers = { 'User-Agent' : random_user_agent }   
         req = urllib2.Request(url, headers = headers)   
         c = urllib2.urlopen(req)
-        return c
+
+    except BaseException as urllib2_proxy_error:
+        print "error: urllib2 proxy error " + output_error.message
+
+    return c
 
 def get_info_by_single_nav_page(page_num, keywords, weibo_id):
     """
@@ -261,6 +261,7 @@ def get_info_by_single_nav_page(page_num, keywords, weibo_id):
     tmp_nav_url = get_nav_page_url_by_keywords(keywords)
     nav_url = tmp_nav_url[0] + str(page_num) + tmp_nav_url[1]
 
+    print "nav_url ->  ", nav_url
     # connect to the website, and build soup
     # get connect to the website
     c = get_connect_by_proxyip_ua(nav_url)
@@ -300,7 +301,7 @@ def get_info_by_single_nav_page(page_num, keywords, weibo_id):
         return (is_existed, existed_account_info, account_info_list)
 
 
-def get_info_by_nav_pages(keywords, weibo_id, max_page_number = 2):
+def get_info_by_nav_pages(keywords, weibo_id, max_page_number = 20):
     """
     Return a list of all the account info by nav pages, so far the max nav page number is 20
     The first two elements are associated with weibo_id
@@ -333,7 +334,7 @@ def get_info_by_nav_pages(keywords, weibo_id, max_page_number = 2):
 
         other_account_info_list = tmp_account_list_is_existed[2]
 
-        if (other_account_info_list == None): # there is no page to crawl
+        if (other_account_info_list == None or other_account_info_list == []): # there is no page to crawl
             log("The max nav page for " + '\"' + keywords + '\"' + " is %d " %(page_num - 1))
             break
 
@@ -364,7 +365,7 @@ def get_account_info(keywords, weibo_id, hash_account_id):
 
 
 def sleep_for_a_while():
-    time.sleep(random.randint(0, 5))
+    time.sleep(random.randint(0, 3))
 
 def sleep_for_a_while_small():
     time.sleep(random.randint(0, 1))
@@ -462,7 +463,7 @@ def account_verify_by_weixin_sogou():
     account_id_tmp = r.spop("account_id_set")
 
     while (account_id_tmp != None):
-
+        print "The remain number of account to search is %d" % r.scard('account_id_set')
         account_id_tmp = 'hash_account_id_' + str(account_id_tmp)
         weibo_name = r.hget(account_id_tmp, "weibo_name")
         weibo_id = r.hget(account_id_tmp, "weibo_id")
@@ -493,3 +494,4 @@ def account_verify_by_weixin_sogou():
 
         # next iteration
         account_id_tmp = r.spop("account_id_set")
+

@@ -48,7 +48,7 @@ def get_account_info_from_mysql():
 		# get account info from babysitter_account
 		cur.execute("SELECT account_id, weibo_name, weibo_id\
 					 FROM babysitter_account \
-					 WHERE weibo_type = 9 LIMIT 5")
+					 WHERE weibo_type = 9 LIMIT 10")
 
 		# get the header
 		desc = cur.description
